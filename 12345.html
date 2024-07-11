@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Business Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #83f28f; /* Green background */
+            color: #000; /* Black text color */
+        }
+        header {
+            background-color: #000; /* Black background for the header */
+            color: #fff; /* White text color */
+            padding: 20px 0;
+            text-align: left; /* Align text to the left */
+            padding-left: 20px; /* Add padding to the left for spacing */
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #000; /* Black background for the navigation bar */
+            padding: 10px 0;
+        }
+        nav a {
+            color: #fff; /* White text color for navigation links */
+            padding: 15px 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #69d276; /* Slightly darker green on hover */
+        }
+        section {
+            padding: 40px;
+            margin: 20px auto;
+            background: #fff; /* White background for sections */
+            color: #000; /* Black text color */
+            border-radius: 10px;
+            width: 90%; /* Width of the section */
+            max-width: 1200px; /* Maximum width of the section */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for separation */
+            opacity: 0; /* Start hidden for animation */
+            transform: scale(0.9); /* Start slightly scaled down for animation */
+            animation: fadeInZoom 1s forwards; /* Apply animation */
+        }
+        .services {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between service boxes */
+        }
+        .service {
+            flex: 1;
+            min-width: 250px; /* Minimum width of each service box */
+            padding: 20px;
+            background: #eee; /* Light gray background for service boxes */
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Light shadow for service boxes */
+        }
+        footer {
+            background-color: #000; /* Black background for the footer */
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .hidden {
+            display: none;
+        }
+        .login-container {
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f0f0f0; /* Light gray background for the login container */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners for the login container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for the login container */
+            position: relative;
+        }
+        .login-rectangle {
+            background-color: #d3d3d3; /* Light gray color */
+            width: 500px;
+            height: 550px; /* Increased height to accommodate new input field */
+            margin: 0 auto; /* Center the rectangle */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for the rectangle */
+            position: relative;
+        }
+        .login-container input {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            background-color: #f0f0f0; /* Light gray background for inputs */
+            border: 1px solid #ccc; /* Border for the input */
+            border-radius: 5px; /* Rounded corners */
+            display: block;
+            margin: 10px auto;
+        }
+        .login-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000; /* Black background for button */
+            color: #fff; /* White text color for button */
+            border: none;
+            border-radius: 5px;
+        }
+        .login-container button:hover {
+            background-color: #333; /* Darker black on hover */
+        }
+        .error-message {
+            color: red; /* Red text color for error messages */
+            margin-top: 10px;
+        }
+        .vibrate {
+            animation: vibrate 0.3s ease;
+        }
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(2px); }
+        }
+        @keyframes fadeInZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .phone-link {
+            color: blue; /* Blue color for phone link */
+            text-decoration: underline; /* Underline to indicate it's a link */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+        .phone-link:hover {
+            color: darkblue; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login">
+        <div class="login-rectangle">
+            <h1>Login Required</h1>
+            <p>Please enter your username and password to access the content.</p>
+            <input type="text" id="username" placeholder="Enter username" onkeypress="handleKeyPress(event)">
+            <input type="password" id="password" placeholder="Enter password" onkeypress="handleKeyPress(event)">
+            <button onclick="checkCredentials()">Log In</button>
+            <div id="error-message" class="error-message hidden"></div> <!-- Error message container -->
+        </div>
+    </div>
+
+    <div class="container hidden" id="content">
+        <header>
+            <h1>Sattar Weaving Factory</h1>
+        </header>
+        
+        <nav>
+            <a href="#home">Home</a>
+            <a id="kashif-link" href="#">Kashif Sattar</a>
+            <a href="#abdulsattar">Abdul Sattar</a>
+            <a href="#asif">Asif Sattar</a>
+            <a href="#aamir">Aamir Sattar</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+
+        <section id="home">
+            <h2>Welcome to Our Business</h2>
+            <p>We provide high-quality services to help you achieve your goals. Our team of experts is here to support you every step of the way.</p>
+        </section>
+
+        <section id="abdulsattar">
+            <h2>Abdul Sattar</h2>
+            <p>Information about Abdul Sattar.</p>
+        </section>
+
+        <section id="asif">
+            <h2>Asif Sattar</h2>
+            <p>Information about Asif Sattar.</p>
+        </section>
+
+        <section id="aamir">
+            <h2>Aamir Sattar</h2>
+            <p>Information about Aamir Sattar.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Our company is dedicated to offering exceptional service and support. We have years of experience in the industry and are committed to helping our clients succeed.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="services">
+                <div class="service">
+                    <h3>Service 1</h3>
+                    <p>Description of Service 1.</p>
+                </div>
+                <div class="service">
+                    <h3>Service 2</h3>
+                    <p>Description of Service 2.</p>
+                </div>
+                <div class="service">
+                    <h3>Service 3</h3>
+                    <p>Description of Service 3.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like to get in touch, please contact us at:</p>
+            <p>Email: info@sattarweavingfactory.com</p>
+            <p>Phone: (123) 456-7890</p>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Sattar Weaving Factory. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        var correctUsername = "kashif";
+        var correctPassword = "kashif123"; // Password for accessing the content
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var kashifLink = document.getElementById('kashif-link');
+            kashifLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+                window.location.href = 'https://www.google.com';
+            });
+        });
+
+        function checkCredentials() {
+            var enteredUsername = document.getElementById('username').value;
+            var enteredPassword = document.getElementById('password').value;
+            var errorMessage = document.getElementById('error-message');
+            var usernameInput = document.getElementById('username');
+            var passwordInput = document.getElementById('password');
+            
+            if (enteredUsername === correctUsername && enteredPassword === correctPassword) {
+                document.getElementById('login').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                errorMessage.classList.add('hidden'); // Hide the error message if username and password are correct
+            } else {
+                usernameInput.classList.add('vibrate'); // Add vibration effect
+                passwordInput.classList.add('vibrate'); // Add vibration effect
+                errorMessage.textContent = 'Incorrect username or password'; // Set the error message
+                errorMessage.classList.remove('hidden'); // Show the error message
+                setTimeout(() => {
+                    usernameInput.classList.remove('vibrate'); // Remove vibration effect after 0.3s
+                    passwordInput.classList.remove('vibrate'); // Remove vibration effect after 0.3s
+                }, 300); 
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default form submission
+                checkCredentials(); // Call the function to check the username and password
+            }
+        }
+    </script>
+</body>
+</html>
